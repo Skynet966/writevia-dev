@@ -1,0 +1,63 @@
+@import '../../../../styles/utils'
+.counter
+    display: inline-flex
+    flex-flow: column
+    align-items: center
+    gap: 0.5em
+    transition: all 0.2s ease-in
+    cursor: pointer
+    div
+        transition: all 0.2s ease-in
+    span
+        color: $White
+        font-size: 1.2em
+        transition: all 0.2s ease-in
+    p
+        text-transform: uppercase
+        font-weight: bolder
+        font-size: 1em
+.heart
+    animation: heartBeat 1.2s infinite
+    color: crimson
+@keyframes heartBeat
+    0%
+        transform: scale(0.8)
+    10%
+        transform: scale(0.9)
+    20%
+        transform: scale(0.8)
+    30%
+        transform: scale(1)
+    70%
+        transform: scale(0.8)
+    100%
+        transform: scale(0.8)
+.jump
+    animation: jumpingMan 1s infinite
+@keyframes jumpingMan
+    0%
+        transform: translateY(5%)
+    50%
+        transform: translateY(0%)
+    100%
+        transform: translateY(5%)
+.wiggle
+    animation: wiggling 1.2s infinite
+@keyframes wiggling
+    0%
+        transform: rotate(-10deg)
+    50%
+        transform: rotate(10deg)
+    100%
+        transform: rotate(-10deg)
+.ting
+    animation: tingtong 1s infinite
+@keyframes tingtong
+    0%
+        transform: scale(0.9)
+    50%
+        transform: scale(1)
+        color: $White
+    100%
+        transform: scale(0.9)
+        

@@ -1,0 +1,71 @@
+@import '../../../../styles/utils'
+.contact 
+    li 
+        position: relative
+        margin-bottom: 20px
+        padding-left: 55px
+        padding-top: 5px
+        min-height: 40px
+        a
+            font-weight: 500    
+        i
+            position: absolute
+            left: 0
+            top: 0
+            width: 40px
+            text-align: center
+            height: 40px
+            background: $White
+            color: $Primary
+            border: 1px solid $Grey1
+            line-height: 40px
+            border-radius: 50%
+            &:hover
+                box-shadow: 0 0 3px $Primary
+.fa-phone
+    &:hover
+        animation: call 1.2s infinite
+.fa-map-marker:hover
+    &::before
+        animation: location 1.5s infinite
+.fa-envelope:hover
+    &::before
+        animation: mail 1.5s infinite
+@keyframes call
+    0%
+        transform: rotate(10deg)
+    10%
+        transform: rotate(-10deg)
+    20%
+        transform: rotate(10deg)
+    30%
+        transform: rotate(-10deg)
+    40%
+        transform: rotate(10deg)
+    50%
+        transform: rotate(10deg)
+    60%
+        transform: rotate(10deg)
+    70%
+        transform: rotate(-10deg)
+    80%
+        transform: rotate(10deg)
+    90%
+        transform: rotate(-10deg)
+    100%
+        transform: rotate(10deg)
+@keyframes location
+    0%
+        font-size: 18px
+    50%
+        font-size: 6px
+    100%
+        font-size: 18px
+@keyframes mail
+    0%
+        content: '\f0e0'
+    50%
+        content: '\f2b6'
+    100%
+        content: '\f0e0'
+        

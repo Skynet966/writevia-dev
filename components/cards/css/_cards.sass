@@ -1,0 +1,163 @@
+@import '../../../styles/utils'
+.post-card-xs,.post-card-xl,.post-card-sm,.post-card-md,.post-card-lg
+    margin-bottom: 2em
+.post-img,.post-card-img
+    overflow: hidden
+    display: block
+    img
+        width: 100%
+        border-radius: 0.25em 0.25em 0 0
+        transition: 1.6s transform
+        &:hover
+            transform: scale(1.2)
+.post-card-body
+    display: block
+    padding: 1em
+    position: relative
+    margin: -80px 0 0 3%
+    z-index: 2
+    background: white
+    border-radius: 3px 0 0 0
+    .fa
+        padding-right: 5px
+.post-card-top
+    display: flex
+    justify-content: space-between
+    align-items: center
+.post-card-category
+    text-transform: uppercase
+    color: #ee4266
+    font-size: 14px
+    font-weight: 700
+    margin-bottom: 5px
+    a
+        font-weight: bold
+.post-card-share
+    ul
+        list-style: none
+        padding: 0
+        li
+            display: inline-block
+            padding: 0 0.4em
+.post-card-title
+    display: block
+    font-weight: bolder
+    font-size: 1.25em
+    text-align: justify
+    line-height: 1.2em
+.post-card-meta
+    display: block
+    padding: 1em 0
+    ul
+        padding: 0
+        list-style: none
+        li
+            display: inline-block
+            color: #97989b
+            font-size: 12px
+            text-transform: uppercase
+            padding-right: 8px
+            span::before
+                padding: 0 4px 0 0
+                font-weight: bolder
+.post-card-xs
+    position: relative
+    .post-card-img
+        float: left
+        display: block
+        overflow: hidden
+        margin-bottom: 20px
+        img
+            width: 130px
+            border-radius: 0.1em
+    .post-card-body
+        position: relative
+        background: transparent
+        margin: 0 0 0 150px
+        padding: 0
+        .post-card-category
+            font-size: 12px
+            font-weight: bolder
+        .post-card-title
+            font-size: 0.9em
+            margin: 5px 0
+            height: 40px
+            overflow: hidden
+            text-align: left
+        .post-card-meta
+            padding: 0
+            font-size: 10px
+.post-card-lg
+    display: block
+    .post-card-img
+        display: inline-block
+        width: 40%
+    .post-card-body
+        display: inline-block
+        width: 60%
+        margin: 0
+        vertical-align: top
+        padding-top: 0
+        .post-card-title
+            font-size: 1.15em
+            margin-bottom: 0px
+            font-style: normal
+        .post-card-meta
+            padding: 5px 0
+            font-size: 0.8em
+            display: inline-flex
+            gap: 10px
+        // img
+    // .post-card-body
+    // .post-card-meta
+@media screen and ( min-width: $sm )
+    .post-card-sm
+        .post-card-img
+            margin: 0
+        .post-card-body
+            margin: 0
+            z-index: 0
+            border-radius: 0
+            padding: 0.2em 0
+            .post-card-title
+                font-size: 1em
+                line-height: 1em
+            .post-card-meta
+                padding: 0.5em 0
+    .post-card-lg
+        box-shadow: 0 0 6px black
+        border-radius: 1em
+        .post-card-img
+            width: 100%
+            border-radius: 1em 1em 0 0
+        .post-card-body
+            width: 100%
+            border-radius: 1em
+
+.post-nav-card
+    display: flex
+    font-size: 0.9em
+    margin: 50px 0
+    gap: 40px
+.post-nav
+    display: flex
+    flex-flow: row
+    gap: 0 20px
+    &.left
+        text-align: left
+    &.right
+        flex-direction: row-reverse
+        text-align: right 
+    .post-body
+        .post-title
+            font-weight: 700
+            height: 68px
+            text-overflow: ellipsis
+            overflow: hidden
+        .post-subtitle
+            color: $Grey2
+            font-weight: 800
+            text-transform: uppercase
+@media screen and ( max-width: $lg )
+    .post-nav-card .post-nav
+        flex-flow: column

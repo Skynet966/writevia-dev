@@ -1,0 +1,43 @@
+.weather-widget
+    display: block
+    visibility: hidden
+    opacity: 0
+    box-shadow: inset 0px 0px 6px black
+    border-radius: 1em
+    padding: 1em
+    text-transform: uppercase
+    transition: all 1s ease-in
+    .date
+        font-size: 1em
+        font-weight: bold
+        color: #0000005e
+        display: block
+    .location
+        display: block
+        font-size: 1.25em
+        font-weight: bolder
+        .city
+            display: inline-flex
+            &::after
+                content: ','
+        .country
+            display: inline-flex
+            padding-left: 0.5em
+    .weather
+        display: inline-flex
+        align-items: center
+        font-weight: lighter
+        .temp
+            display: inline-flex
+            font-size: 3em
+            &::after
+                content: '\00B0'
+        .desc
+            padding: 0 5px
+    .art
+        float: right
+        img
+            width: 90px
+.show
+    visibility: visible
+    opacity: 1

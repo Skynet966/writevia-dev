@@ -1,0 +1,288 @@
+// Style Name: Writevia Style
+// Author: Satish Kumar Yadav
+// version : 1.0.0
+
+// Colors:
+// 	Body 		: #505050
+// 	Headers 	: #11151c
+// 	Primary 	: #ee4266
+// 	Dark 		: #1b1c1e
+// 	Grey 		: #e8eaed #97989b #32333
+
+// Fonts: Montserrat & Muli
+
+// ----------------------------
+// 	typography
+// ----------------------------
+@use '../containers/css/containers'
+@use '../components/headers/css/headers'
+@use '../components/widgets/weather/css/wather'
+@use '../components/widgets/social/css/social'
+@use '../components/cards/css/cards'
+@use '../components/widgets/intro/css/intro'
+@use '../components/widgets/authors/css/authors'
+@use '../components/widgets/tags/css/tags'
+@use '../components/widgets/counters/css/counter'
+@use '../components/widgets/gototop/css/gototop'
+@use '../components/widgets/categories/css/categories'
+@use '../components/widgets/subscribe/css/subscribe'
+@use '../components/editorjs/css/editorjs'
+@use '../components/widgets/contact/css/contact'
+@use '../components/widgets/popups/css/popups'
+@use '../components/widgets/typography/css/typography'
+@use '../components/widgets/like/css/like'
+@import './utils'
+html
+    scroll-behavior: smooth
+body
+    font-family: 'Mulish', sans-serif
+    color: $Body
+    font-size: 16px
+    font-weight: 400
+    overflow-x: hidden
+h1,h2,h3,h4,h5,h6
+    font-family: 'Montserrat', sans-serif
+    color: $Headers
+    font-weight: 700
+    margin: 0 0 15px
+h1
+    font-size: 32px
+h2
+    font-size: 25px
+h3
+    font-size: 20px
+h4
+    font-size: 16px
+h5
+    font-size: 12px
+h6
+    font-size: 8px
+p
+    margin: 0 0 20px
+a
+    color: $Headers
+    transition: 0.2s color
+    &:hover,&:focus
+        color: $Primary
+        text-decoration: none
+        outline: none
+::selection
+    background-color: $Primary
+    color: $White
+ul,ol
+    margin: 0
+    padding: 0
+    list-style: none
+ul.list-style, ol.list-style
+    padding-left: 15px
+    margin-bottom: 10px
+ul.list-style
+    list-style-type: disc
+ol.list-style
+    list-style-type: decimal
+figure
+    margin-bottom: 20px
+figure
+    img
+        width: 100%
+    .pull-right
+        margin-left: 15px
+    .pull-left
+        margin-right: 15px
+.typewriter
+        overflow: hidden
+        white-space: nowrap
+        border-right: .15em solid orange
+        letter-spacing: .15em
+        animation: typing 1s steps(70, end), blink-caret 0.8s step-end infinite
+@keyframes typing 
+    from
+        width: 0% 
+    to
+        width: 100%
+@keyframes blink-caret
+    from, to
+        border-color: transparent
+    50%
+        border-color: orange
+        
+// ----------------------------
+// 	section
+// ----------------------------
+.section
+    padding-top: 30px
+.section-row
+    margin-bottom: 30px
+.section-title
+    position: relative
+    margin-bottom: 20px
+    .title
+        position: relative
+        display: inline-block
+        background-color: #fff
+        font-size: 1rem
+        font-weight: 800
+        text-transform: uppercase
+        margin-top: 0px
+        margin-bottom: 0px
+        padding-right: 10px
+        z-index: 2
+        color: #11151c
+        &:after
+            content: ""
+            display: inline-block
+            height: 3px
+            background-color: #e8eaed
+            position: absolute
+            left: 15px
+            right: 15px
+            top: 10px
+            z-index: 0
+.section-subtitle
+    position: relative
+    margin-bottom: 10px
+    margin-top: 10px
+    padding: 0
+    .title
+        position: relative
+        display: inline-block
+        background-color: #fff
+        font-size: 1em
+        font-weight: 800
+        text-transform: uppercase
+        margin-top: 0px
+        margin-bottom: 0px
+        padding-right: 8px
+        z-index: 2
+        color: #97989b
+        &:after
+            content: ""
+            display: inline-block
+            height: 2px
+            background-color: #e8eaed
+            position: absolute
+            left: 15px
+            right: 0
+            top: 12px
+            z-index: 0
+// ---------------------------------------
+//     input
+// ---------------------------------------
+.input
+    width: 100%
+    height: 40px
+    padding: 0 15px
+    background-color: $White
+    border-radius: 5px
+    border: 2px solid $Grey1
+    outline: none
+    &:focus
+        box-shadow: 0 0 4px 1px $Primary
+textarea.input
+    padding: 15px
+    height: 90px
+button
+    &:focus
+        outline: 0
+// ---------------------------------------
+//     button
+// ---------------------------------------
+.primary-button, .secondary-button
+    display: inline-block
+    padding: 10px 40px
+    border-radius: 2px
+    border: none
+    color: $White
+    font-weight: 700
+    font-size: 14px
+    text-transform: uppercase
+    transition: 0.2s all
+    &:hover,&:focus
+        background-color: transparent
+.primary-button
+    background-color: $Primary
+    box-shadow: inset 0 0 0 2px $Primary
+    &:hover,&:focus
+        color: $Primary
+.secondary-button
+    background-color: $Secondary
+    box-shadow: 0 0 0 0 2px $Secondary inset
+    &:hover,&:focus
+        color: $Secondary
+// ---------------------------------------
+//     Social colors
+// ---------------------------------------
+.social-facebook
+    background: $fb !important
+.social-twitter
+    background: $tw !important
+.social-pinterest
+    background: $pr !important
+.social-instagram
+    background: $in !important
+.social-whatsapp
+    background: $wa !important
+.social-linkedin
+    background: $li !important
+.social-facebook-color
+    color: $fb !important
+.social-twitter-color
+    color: $tw !important
+.social-pinterest-color
+    color: $pr !important
+.social-instagram-color
+    color: $in !important
+.social-whatsapp-color
+    color: $wa !important
+.social-linkedin-color
+    color: $li !important
+// ---------------------------------------
+//     Section
+// ---------------------------------------
+.section
+    padding-top: 30px
+.section-row
+    margin-bottom: 30px
+// ------------------------------------
+//     team
+// ------------------------------------
+.author.media .media-left 
+    position: relative
+    padding-right: 30px
+
+
+.author .author-img 
+    width: 100px
+    height: 100px
+    background-position: center center
+    background-repeat: no-repeat
+    border-radius: 50%
+    margin-bottom: 15px
+    
+
+
+.auth-img 
+    width: 200px
+    height: 200px
+    background-position: center center
+    background-repeat: no-repeat
+    border-radius: 50%
+    margin-bottom: 15px
+
+
+.author .author-social li 
+    display: inline-block
+    margin-right: 10px
+
+
+.author .author-social li a 
+    display: block
+
+
+.page-header .author .author-social li a 
+    color: #fff
+
+
+.page-header .author .author-social li a:hover,
+.page-header .author .author-social li a:focus 
+    color: #ee4266

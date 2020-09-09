@@ -1,0 +1,43 @@
+@import '../../../../styles/utils'
+.social-widget ul
+    overflow: hidden
+    padding: 0
+    list-style: none
+    margin-bottom: 20px
+    box-shadow: 0px 0px 3px black
+    li
+        float: left
+        width: 33.33%
+        a 
+            display: block
+            text-align: center
+            padding: 30px 15px
+            color: $White
+            -webkit-transition: 0.2s opacity
+            transition: 0.2s opacity
+        &:hover 
+            opacity: 0.9
+        span 
+            font-weight: 700
+            font-size: 14px
+        i 
+            display: block
+            font-size: 30px
+            margin-bottom: 10px
+.contact-social
+    display: flex
+    justify-content: flex-start
+    gap: 15px
+    a
+        display: flex
+        align-items: center
+        justify-content: center
+        width: 40px
+        height: 40px
+        border-radius: 30px
+        color: $White
+        transition: 0.5s transform
+        &:hover
+            transform: scale(1.2)
+            box-shadow: 0 0 4px $White
+            color: $White

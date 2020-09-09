@@ -1,0 +1,36 @@
+@import '../../../../styles/utils'
+.message
+    display: inline-block
+    font: normal normal normal 14px/1 FontAwesome
+    font-size: inherit
+    text-rendering: auto
+    -webkit-font-smoothing: antialiased
+    position: absolute
+    top: 12px
+    right: 25px
+    .desc
+        display: inline
+        opacity: 0
+        transition: all 0.3s ease-in
+    &:hover, &:focus
+        .desc
+            background: $White
+            opacity: 1
+    &::after
+        background: $White
+.error
+    color: $Error
+    &::after
+        content: '\f06a'
+        margin-left: 5px
+.info
+    color: $Info
+    &::after
+        content: '\f05a'
+        margin-left: 5px
+.success
+    color: $Success
+    &::after
+        content: '\f058'
+        margin-left: 5px
+        
