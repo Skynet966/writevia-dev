@@ -14,23 +14,23 @@ export default function ContactUs(){
                     <div className="container">
                         <div className="row">
                             <div className="col-md-12 form-group">
-                                <input className="input" type="text" placeholder="Name"/>
+                                <input className="input" type="text" placeholder="Name" required/>
                                 <InputBoxMessage status="" desc=""/>
                             </div>
                             <div className="col-md-12 form-group">
-                                <input className="input" type="email" placeholder="Email"/>
+                                <input className="input" type="email" placeholder="Email" required/>
                                 
                             </div>
                             <div className="col-md-12 form-group">
-                                <input className="input" type="number" placeholder="Contact number"/>
+                                <input className="input" type="tel" placeholder="Contact number" required/>
                                 
                             </div>
                             <div className="col-md-12 form-group">
-                                <textarea className="input" placeholder="Message..."/>
+                                <textarea className="input" placeholder="Message..." required/>
                                 
                             </div>
                             <div className="col-md-4 form-group">
-                                <button className="primary-button" >Submit</button>
+                                <button type="submit" className="primary-button">Submit</button>
                             </div>
                         </div>
                     </div>
