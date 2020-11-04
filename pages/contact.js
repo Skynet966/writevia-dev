@@ -31,9 +31,34 @@ export default class ContactUs extends PureComponent{
                 value:'',
                 status:'',
                 desc:''
-            },
-            
+            }
         }
+    }
+    clearForm(){
+        const form=document.querySelector('#contactForm');
+        this.setState({
+            name:{
+                value:'',
+                status:'',
+                desc:''
+            },
+            email:{
+                value:'',
+                status:'',
+                desc:''
+            },
+            phone:{
+                value:'',
+                status:'',
+                desc:''
+            },
+            message:{
+                value:'',
+                status:'',
+                desc:''
+            }
+        });
+        form.reset();
     }
     handleChange(e){
         e.preventDefault();
@@ -68,14 +93,14 @@ export default class ContactUs extends PureComponent{
             }
             fetch(url,postRequestHeader(data)).then(res=>{
                 res.json().then(doc=>{
-                    console.log(doc);
-                    if(doc.status){
+                    if(doc.status===1){
                         Swal.fire({
                             icon:'success',
                             title:'Message sent Successfully',
                             text:'Dear '+doc.name+', Your message successfully sent to our team. Thank you',
                             footer:'Our Team contact with you soon (within 36 Hours)'
                         })
+                        this.clearForm();
                     }else if(doc.status===409){
                         Swal.fire({
                             icon:'info',
@@ -83,7 +108,7 @@ export default class ContactUs extends PureComponent{
                             text:'Dear '+data.name+', Your message alredy save at our server. Thank you!.',
                             footer:'Our Team contact with you soon (within 36 Hours)'
                         })
-                        e.target.reset();
+                        this.clearForm();
                     }else{
                         Swal.fire({
                             icon:'error',
@@ -137,7 +162,7 @@ export default class ContactUs extends PureComponent{
                 <div className="row">
                     <div className="col-md-7">
                         <HeaderMain title="Write to us"/>
-                        <form onSubmit={this.handleSubmit.bind(this)} className="container">
+                        <form id="contactForm" onSubmit={this.handleSubmit.bind(this)} className="container">
                             <div className="row">
                                     <div className="col-md-12 form-group">
                                         <input className="input" name="name" onFocus={this.handleFocus.bind(this)} onBlur={this.handleChange.bind(this)} type="text" placeholder="Name" required/>
