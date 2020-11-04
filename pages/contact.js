@@ -31,8 +31,29 @@ export default class ContactUs extends PureComponent{
                 value:'',
                 status:'',
                 desc:''
-            }
+            },
+            countries:[]
         }
+    }
+    componentDidMount(){
+        this.populatesCountries();
+    }
+    populatesCountries(){
+        fetch('https://restcountries.eu/rest/v2/all').then(res=>{
+            let country=[];
+            let i=0;
+            res.json().then(doc=>{
+                doc.map(data=>{
+                    country[i]={name:data.name,code:data.callingCodes[0]};
+                    i++;
+                });
+                this.setState({countries:country});
+            }).catch(err=>{
+                console.error(err);
+            }).catch(err=>{
+                console.log(err);
+            })
+        })
     }
     clearForm(){
         const form=document.querySelector('#contactForm');
@@ -48,6 +69,7 @@ export default class ContactUs extends PureComponent{
                 desc:''
             },
             phone:{
+                code:'',
                 value:'',
                 status:'',
                 desc:''
@@ -71,8 +93,12 @@ export default class ContactUs extends PureComponent{
             error='Enter a valid email';
         }else if(name==='phone'&&(success='Quite a nice phone number')&&!validator.isNumeric(value)&&value.length!==10){
             error='Enter valid phone number';
-        }else if(name==='message'&&(success='It\'s looks perfect')&&validator.isEmpty(value)){
-            error='Enter message properly';
+        }else if(name==='message'&&(success='It\'s looks perfect')&&value.length<11){
+            error='Enter at least 10 character';
+        }else if(name==='code'){
+            console.log(value);
+            this.setState({phone:{code:value}});
+            return;
         }
         if(validator.isEmpty(error)){
             this.setState({[name]:{value:value,status:'success',desc:success}});
@@ -89,6 +115,7 @@ export default class ContactUs extends PureComponent{
                 name:s.name.value,
                 email:s.email.value,
                 phone:s.phone.value,
+                code:s.phone.code,
                 message:s.message.value
             }
             fetch(url,postRequestHeader(data)).then(res=>{
@@ -146,7 +173,7 @@ export default class ContactUs extends PureComponent{
                         break;
             case 'email': desc='Email must have proper format';
                         break;
-            case 'phone': desc='We only require 10 digits number';
+            case 'phone': desc='Require 10 digits only';
                         break;
             case 'message': desc='Write your message here';
                         break;
@@ -155,6 +182,8 @@ export default class ContactUs extends PureComponent{
             this.setState({[name]:{status:'info',desc:desc}});
     }
     render(){
+        let countries=this.state.countries;
+        let options=countries.map(val=>{return(<option key={val.name} value={val.key}>{val.name} (+{val.code})</option>)})
         return (
             <>
             <HeaderMax title="Contact Us" subtitle="Give your valuable feedback to improve user experience and content on our website. We value your experience."/>
@@ -172,7 +201,13 @@ export default class ContactUs extends PureComponent{
                                         <input className="input" name="email" onFocus={this.handleFocus.bind(this)} onBlur={this.handleChange.bind(this)} type="email" placeholder="Email" required/>
                                         <InputBoxMessage status={this.state.email.status} desc={this.state.email.desc}/>
                                     </div>
-                                    <div className="col-md-12 form-group">
+                                    <div className="col-md-4 form-group">
+                                        <select className="input" name="code" onChange={this.handleChange.bind(this)} required>
+                                            <option key="default" value="default">Country Code</option>
+                                            {options}
+                                        </select>
+                                    </div>
+                                    <div className="col-md-8 form-group">
                                         <input className="input" name="phone" onFocus={this.handleFocus.bind(this)} onBlur={this.handleChange.bind(this)} type="tel" placeholder="Contact number" required/>
                                         <InputBoxMessage status={this.state.phone.status} desc={this.state.phone.desc}/>
                                     </div>
