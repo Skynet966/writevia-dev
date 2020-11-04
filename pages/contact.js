@@ -166,6 +166,7 @@ export default class ContactUs extends PureComponent{
     }
     handleFocus(e){
         e.preventDefault();
+        console.log(this.state)
         let {name,value}=e.target;
         let desc='';
         switch(name){
@@ -202,7 +203,7 @@ export default class ContactUs extends PureComponent{
                                         <InputBoxMessage status={this.state.email.status} desc={this.state.email.desc}/>
                                     </div>
                                     <div className="col-md-4 form-group">
-                                        <select className="input" name="code" onChange={this.handleChange.bind(this)} required>
+                                        <select className="input" name="code" onChange={this.handleChange.bind(this)} placeholder="Country code" required>
                                             <option key="default" value="default">Country Code</option>
                                             {options}
                                         </select>
