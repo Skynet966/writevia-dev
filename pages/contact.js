@@ -12,6 +12,7 @@ export default class ContactUs extends PureComponent{
     constructor(){
         super();
         this.state={
+            loading:false,
             name:{
                 value:'',
                 status:'',
@@ -92,7 +93,6 @@ export default class ContactUs extends PureComponent{
         }else if(name==='message'&&(success='It\'s looks perfect')&&value.length<11){
             error='Enter at least 10 character';
         }else if(name==='code'){
-            console.log(value)
             this.setState({code:value});
             return;
         }
@@ -114,8 +114,10 @@ export default class ContactUs extends PureComponent{
                 phone:'+'+s.code+s.phone.value,
                 message:s.message.value
             }
+            this.setState({loading:true});
             fetch(url,postRequestHeader(data)).then(res=>{
                 res.json().then(doc=>{
+                    this.setState({loading:false});
                     if(doc.status===1){
                         Swal.fire({
                             icon:'success',
@@ -162,7 +164,6 @@ export default class ContactUs extends PureComponent{
     }
     handleFocus(e){
         e.preventDefault();
-        console.log(this.state)
         let {name,value}=e.target;
         let desc='';
         switch(name){
@@ -180,7 +181,7 @@ export default class ContactUs extends PureComponent{
     }
     render(){
         let countries=this.state.countries;
-        let options=countries.map(val=>{return(<option key={val.country} value={val.country_code}>{val.country} (+{val.country_code})</option>)})
+        let options=countries.map(val=>{return(<option key={val.country} value={val.country_code}>{val.country} (+{val.country_code})</option>)});
         return (
             <>
             <HeaderMax title="Contact Us" subtitle="Give your valuable feedback to improve user experience and content on our website. We value your experience."/>
@@ -188,7 +189,7 @@ export default class ContactUs extends PureComponent{
                 <div className="row">
                     <div className="col-md-7">
                         <HeaderMain title="Write to us"/>
-                        <form id="contactForm" onSubmit={this.handleSubmit.bind(this)} className="container">
+                        <form id="contactForm" onSubmit={this.handleSubmit.bind(this)} className={(this.state.loading)?'container loading':'container'}>
                             <div className="row">
                                     <div className="col-md-12 form-group">
                                         <input className="input" name="name" onFocus={this.handleFocus.bind(this)} onBlur={this.handleChange.bind(this)} type="text" placeholder="Name" required/>

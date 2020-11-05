@@ -286,3 +286,18 @@ button
 .page-header .author .author-social li a:hover,
 .page-header .author .author-social li a:focus 
     color: #ee4266
+
+.loading
+    opacity: 0.5
+    &::after
+        content: 'Processing...'
+        text-align: center
+        padding: 35%
+        position: absolute
+        top: 0
+        right: 0
+        bottom: 0
+        left: 0
+        background: url(https://icons8.com/preloaders/preloaders/831/Pinwheel.gif)
+        background-position: center
+        background-repeat: no-repeat

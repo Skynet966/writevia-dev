@@ -6,9 +6,9 @@ function MyApp({ Component, pageProps }){
   return (
     <>
     <Layout/>
-    <Header/>
-    <Component {...pageProps}/>
-    <Footer/>
+      <Header/>
+          <Component {...pageProps}/>
+      <Footer/>
     </>
   )
 }
