@@ -87,7 +87,7 @@ export default class ContactUs extends PureComponent{
             error='Enter a proper name';
         }else if(name==='email'&&(success='Email is looking fine')&&!validator.isEmail(value)){
             error='Enter a valid email';
-        }else if(name==='phone'&&(success='Quite a nice phone number')&&!validator.isNumeric(value)&&value.length!==10){
+        }else if(name==='phone'&&(success='Quite a nice phone number')&&!validator.isNumeric(value)){
             error='Enter valid phone number';
         }else if(name==='message'&&(success='It\'s looks perfect')&&value.length<11){
             error='Enter at least 10 character';
@@ -107,6 +107,7 @@ export default class ContactUs extends PureComponent{
         const s=this.state;
         if(s.name.value&&s.email.value&&s.phone.value&&s.message.value){
             const url=requestURL('contact/create');
+            if(s.phone.value.indexOf(0)===0&&(s.phone.value=s.phone.value.slice(1)));
             const data={
                 name:s.name.value,
                 email:s.email.value,
