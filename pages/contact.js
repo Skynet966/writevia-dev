@@ -32,6 +32,7 @@ export default class ContactUs extends PureComponent{
                 status:'',
                 desc:''
             },
+            code:'',
             countries:[]
         }
     }
@@ -39,15 +40,9 @@ export default class ContactUs extends PureComponent{
         this.populatesCountries();
     }
     populatesCountries(){
-        fetch('https://restcountries.eu/rest/v2/all').then(res=>{
-            let country=[];
-            let i=0;
-            res.json().then(doc=>{
-                doc.map(data=>{
-                    country[i]={name:data.name,code:data.callingCodes[0]};
-                    i++;
-                });
-                this.setState({countries:country});
+        fetch(requestURL('countries')).then(res=>{
+            res.json().then(data=>{
+                this.setState({countries:data});
             }).catch(err=>{
                 console.error(err);
             }).catch(err=>{
@@ -78,7 +73,8 @@ export default class ContactUs extends PureComponent{
                 value:'',
                 status:'',
                 desc:''
-            }
+            },
+            code:''
         });
         form.reset();
     }
@@ -96,8 +92,8 @@ export default class ContactUs extends PureComponent{
         }else if(name==='message'&&(success='It\'s looks perfect')&&value.length<11){
             error='Enter at least 10 character';
         }else if(name==='code'){
-            console.log(value);
-            this.setState({phone:{code:value}});
+            console.log(value)
+            this.setState({code:value});
             return;
         }
         if(validator.isEmpty(error)){
@@ -114,8 +110,7 @@ export default class ContactUs extends PureComponent{
             const data={
                 name:s.name.value,
                 email:s.email.value,
-                phone:s.phone.value,
-                code:s.phone.code,
+                phone:'+'+s.code+s.phone.value,
                 message:s.message.value
             }
             fetch(url,postRequestHeader(data)).then(res=>{
@@ -184,7 +179,7 @@ export default class ContactUs extends PureComponent{
     }
     render(){
         let countries=this.state.countries;
-        let options=countries.map(val=>{return(<option key={val.name} value={val.key}>{val.name} (+{val.code})</option>)})
+        let options=countries.map(val=>{return(<option key={val.country} value={val.country_code}>{val.country} (+{val.country_code})</option>)})
         return (
             <>
             <HeaderMax title="Contact Us" subtitle="Give your valuable feedback to improve user experience and content on our website. We value your experience."/>
