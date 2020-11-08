@@ -149,14 +149,13 @@ export default class ContactUs extends PureComponent{
     }
     handlePhone(phone){
         let number=phone.target.value.substring(phone.target.value.indexOf(' ')+1);
-        if((number.match(/\d/g) || []).length<10){
+        let len=(number.match(/\d/g) || []).length;
+        if(len<10&&len>0){
             this.state.phone.status='error';
             this.state.phone.desc='Please enter a valid number';
-            // this.setState({phone:{status:'error',desc:'Please enter a valid number'}});
-        }else{
+        }else if(len>=10){
             this.state.phone.status='success';
             this.state.phone.desc='Nice phone number';
-            // this.setState({phone:{status:'success',desc:'Nice phone number'}});
         }
     }
     handleFocus(e){
