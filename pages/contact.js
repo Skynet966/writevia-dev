@@ -150,7 +150,7 @@ export default class ContactUs extends PureComponent{
     handlePhone(phone){
         let number=phone.target.value.substring(phone.target.value.indexOf(' ')+1);
         let len=(number.match(/\d/g) || []).length;
-        if(len<10&&len>0){
+        if(len<10&&len>2){
             this.state.phone.status='error';
             this.state.phone.desc='Please enter a valid number';
         }else if(len>=10){
