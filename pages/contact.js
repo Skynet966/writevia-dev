@@ -92,12 +92,8 @@ export default class ContactUs extends PureComponent{
                 email:s.email.value,
                 message:s.message.value
             }
-            console.log(this.state);
             if(s.phone.value){
-                console.log(true)
-                data.phone=s.phone.value;
-            }else{
-                console.log(s.phone.value)
+                data.phone='+'+s.phone.value;
             }
             this.setState({loading:true});
             fetch(url,postRequestHeader(data)).then(res=>{
@@ -192,7 +188,7 @@ export default class ContactUs extends PureComponent{
                                         <InputBoxMessage status={this.state.email.status} desc={this.state.email.desc}/>
                                     </div>
                                     <div className="col-md-12 form-group">
-                                        <PhoneInput country="in" placeholder="Phone" inputProps={{name:'phone'}} onChange={phone=>this.setState({phone:{value:'+'+phone}})} onBlur={phone=>this.handlePhone(phone)} specialLabel=""/>
+                                        <PhoneInput country="in" placeholder="Phone" inputProps={{name:'phone'}} onChange={phone=>this.setState({phone:{value:phone}})} onBlur={phone=>this.handlePhone(phone)} specialLabel=""/>
                                         <InputBoxMessage status={this.state.phone.status} desc={this.state.phone.desc}/>
                                     </div>
                                     <div className="col-md-12 form-group">
