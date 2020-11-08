@@ -1500,6 +1500,7 @@ footer a:hover, footer a:focus {
 .error::after {
   content: "";
   margin-left: 5px;
+  border-radius: 60px;
 }
 
 .info {
@@ -1508,6 +1509,7 @@ footer a:hover, footer a:focus {
 .info::after {
   content: "";
   margin-left: 5px;
+  border-radius: 60px;
 }
 
 .success {
@@ -1516,6 +1518,7 @@ footer a:hover, footer a:focus {
 .success::after {
   content: "";
   margin-left: 5px;
+  border-radius: 60px;
 }
 
 .like-content {
@@ -1856,10 +1859,15 @@ figure .pull-left {
   border-radius: 5px;
   border: 2px solid #e8eaed;
   outline: none;
+  -webkit-transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+  transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
 }
 .input:focus {
   -webkit-box-shadow: 0 0 4px 1px #ee4266;
           box-shadow: 0 0 4px 1px #ee4266;
+  border-color: #e8eaed;
 }
 
 textarea.input {

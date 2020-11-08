@@ -7,6 +7,7 @@ import validator from "validator";
 import requestURL from "../helpers/requestURL";
 import postRequestHeader from "../helpers/postRequestHeader";
 import Swal from "sweetalert2";
+import PhoneInput from "react-phone-input-2";
 
 export default class ContactUs extends PureComponent{
     constructor(){
@@ -25,31 +26,15 @@ export default class ContactUs extends PureComponent{
             },
             phone:{
                 value:'',
-                status:'',
-                desc:''
+                status:'info',
+                desc:'Phone number is optional'
             },
             message:{
                 value:'',
                 status:'',
                 desc:''
-            },
-            code:'',
-            countries:[]
+            }
         }
-    }
-    componentDidMount(){
-        this.populatesCountries();
-    }
-    populatesCountries(){
-        fetch(requestURL('countries')).then(res=>{
-            res.json().then(data=>{
-                this.setState({countries:data});
-            }).catch(err=>{
-                console.error(err);
-            }).catch(err=>{
-                console.log(err);
-            })
-        })
     }
     clearForm(){
         const form=document.querySelector('#contactForm');
@@ -65,19 +50,16 @@ export default class ContactUs extends PureComponent{
                 desc:''
             },
             phone:{
-                code:'',
-                value:'',
-                status:'',
-                desc:''
+                value:''
             },
             message:{
                 value:'',
                 status:'',
                 desc:''
             },
-            code:''
         });
         form.reset();
+        document.querySelector('input[name=phone]').value='';
     }
     handleChange(e){
         e.preventDefault();
@@ -88,8 +70,6 @@ export default class ContactUs extends PureComponent{
             error='Enter a proper name';
         }else if(name==='email'&&(success='Email is looking fine')&&!validator.isEmail(value)){
             error='Enter a valid email';
-        }else if(name==='phone'&&(success='Quite a nice phone number')&&!validator.isNumeric(value)){
-            error='Enter valid phone number';
         }else if(name==='message'&&(success='It\'s looks perfect')&&value.length<11){
             error='Enter at least 10 character';
         }else if(name==='code'){
@@ -105,14 +85,19 @@ export default class ContactUs extends PureComponent{
     handleSubmit(e){
         e.preventDefault();
         const s=this.state;
-        if(s.name.value&&s.email.value&&s.phone.value&&s.message.value){
+        if(s.name.value&&s.email.value&&s.message.value){
             const url=requestURL('contact/create');
-            if(s.phone.value.indexOf(0)===0&&(s.phone.value=s.phone.value.slice(1)));
-            const data={
+            let data={
                 name:s.name.value,
                 email:s.email.value,
-                phone:'+'+s.code+s.phone.value,
                 message:s.message.value
+            }
+            console.log(this.state);
+            if(s.phone.value){
+                console.log(true)
+                data.phone=s.phone.value;
+            }else{
+                console.log(s.phone.value)
             }
             this.setState({loading:true});
             fetch(url,postRequestHeader(data)).then(res=>{
@@ -162,16 +147,26 @@ export default class ContactUs extends PureComponent{
             })
         }
     }
+    handlePhone(phone){
+        let number=phone.target.value.substring(phone.target.value.indexOf(' ')+1);
+        if((number.match(/\d/g) || []).length<10){
+            this.state.phone.status='error';
+            this.state.phone.desc='Please enter a valid number';
+            // this.setState({phone:{status:'error',desc:'Please enter a valid number'}});
+        }else{
+            this.state.phone.status='success';
+            this.state.phone.desc='Nice phone number';
+            // this.setState({phone:{status:'success',desc:'Nice phone number'}});
+        }
+    }
     handleFocus(e){
         e.preventDefault();
         let {name,value}=e.target;
         let desc='';
         switch(name){
-            case 'name': desc='Name only contains letters';
+            case 'name': desc='Name Contains only letters';
                         break;
             case 'email': desc='Email must have proper format';
-                        break;
-            case 'phone': desc='Require 10 digits only';
                         break;
             case 'message': desc='Write your message here';
                         break;
@@ -180,8 +175,6 @@ export default class ContactUs extends PureComponent{
             this.setState({[name]:{status:'info',desc:desc}});
     }
     render(){
-        let countries=this.state.countries;
-        let options=countries.map(val=>{return(<option key={val.country} value={val.country_code}>{val.country} (+{val.country_code})</option>)});
         return (
             <>
             <HeaderMax title="Contact Us" subtitle="Give your valuable feedback to improve user experience and content on our website. We value your experience."/>
@@ -199,14 +192,8 @@ export default class ContactUs extends PureComponent{
                                         <input className="input" name="email" onFocus={this.handleFocus.bind(this)} onBlur={this.handleChange.bind(this)} type="email" placeholder="Email" required/>
                                         <InputBoxMessage status={this.state.email.status} desc={this.state.email.desc}/>
                                     </div>
-                                    <div className="col-md-4 form-group">
-                                        <select className="input" name="code" onChange={this.handleChange.bind(this)} placeholder="Country code" required>
-                                            <option key="default" value="default">Country Code</option>
-                                            {options}
-                                        </select>
-                                    </div>
-                                    <div className="col-md-8 form-group">
-                                        <input className="input" name="phone" onFocus={this.handleFocus.bind(this)} onBlur={this.handleChange.bind(this)} type="tel" placeholder="Contact number" required/>
+                                    <div className="col-md-12 form-group">
+                                        <PhoneInput country="in" placeholder="Phone" inputProps={{name:'phone'}} onChange={phone=>this.setState({phone:{value:'+'+phone}})} onBlur={phone=>this.handlePhone(phone)} specialLabel=""/>
                                         <InputBoxMessage status={this.state.phone.status} desc={this.state.phone.desc}/>
                                     </div>
                                     <div className="col-md-12 form-group">
