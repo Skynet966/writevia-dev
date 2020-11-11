@@ -10,6 +10,7 @@
   "dependencies": {
     "@editorjs/editorjs": "^2.18.0",
     "bower": "^1.8.8",
+    "editorjs-blocks-react-renderer": "^0.1.1",
     "next": "9.5.3",
     "react": "16.13.1",
     "react-dom": "16.13.1",
